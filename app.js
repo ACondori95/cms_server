@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
-const path = require("path");
+const cors = require("cors");
 
 const connectDB = require("./config/db");
 
@@ -14,7 +14,11 @@ const app = express();
 // middlewares
 app.use(express.json());
 app.use(morgan("tiny"));
-app.use(require("cors")());
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://cms-server-zcqp.onrender.com"],
+  })
+);
 
 // routes
 app.use("/api", authRouter);
